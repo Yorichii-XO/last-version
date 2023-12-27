@@ -122,6 +122,25 @@ background-color:#00FFFF;
             <span class="nav-link-text ms-1">Gérants</span>
         </a>
       </li>
+      <li style="margin-left: -5px" class="nav-item pb-2">
+        <a class="nav-link" href="{{ route('damancoms.index') }}">
+            <div style="background-color:#00FFFF" class="icon  icon-sm shadow border-radius-md  text-center me-2 d-flex align-items-center justify-content-center">
+                
+              <i style="font-size: 1rem;color:black" class="	fas fa-handshake ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-dark' : 'text-dark') }} " aria-hidden="true"></i>
+            </div>
+            <span style="color: white" class="nav-link-text ms-1">Damancom	</span>
+        </a>
+      </li>
+      <li style="margin-left: -5px" class="nav-item pb-2">
+        <a class="nav-link" href="{{ route('impots.index') }}">
+            <div style="background-color:#00FFFF" class="icon  icon-sm shadow border-radius-md  text-center me-2 d-flex align-items-center justify-content-center">
+                
+              <i style="font-size: 1rem;color:black" class="	fas fa-handshake ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-dark' : 'text-dark') }} " aria-hidden="true"></i>
+            </div>
+            <span style="color: white" class="nav-link-text ms-1">Impots	</span>
+        </a>
+      </li>
+
 <hr>     
  <li style="margin-left: -5px" class="nav-item">
 

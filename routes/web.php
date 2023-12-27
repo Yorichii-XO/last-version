@@ -14,6 +14,8 @@ use App\Http\Controllers\AssocieéController;
 use App\Http\Controllers\GerantController;
 use App\Http\Controllers\SocieteController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\DamancomController;
+use App\Http\Controllers\ImpotController;
 
 
 ;
@@ -53,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', function () {
 		return view('profile');
 	})->name('profile');
-
+    
 	Route::get('rtl', function () {
 		return view('rtl');
 	})->name('rtl');
@@ -110,6 +112,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/register', [RegisterController::class, 'store']);
     Route::get('/login', [SessionsController::class, 'create']);
     Route::post('/session', [SessionsController::class, 'store']);
+
 	Route::get('/login/forgot-password', [ResetController::class, 'create']);
 	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
 	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
@@ -159,3 +162,23 @@ Route::delete('/societes/destroy/{id}', [SocieteController::class, 'destroy'])->
 Route::get('/societes/show/{id}', [SocieteController::class, 'show'])->name('societes.show');
 Route::get('/societes/search', [SocieteController::class, 'search'])->name('societes.search');
 Route::get('/test', [NotificationController::class, 'index'])->name('test.index');
+//damancom
+Route::get('/damancoms', [DamancomController::class, 'index'])->name('damancoms.index');
+Route::get('/damancoms/create', [DamancomController::class, 'create'])->name('damancoms.create');
+
+Route::post('/damancoms', [DamancomController::class, 'store'])->name('damancoms.store');
+Route::get('/damancoms/edit/{id}', [DamancomController::class, 'edit'])->name('damancoms.edit');
+Route::put('/damancoms/update/{id}', [DamancomController::class, 'update'])->name('damancoms.update');
+Route::delete('/damancoms/destroy/{id}', [DamancomController::class, 'destroy'])->name('damancoms.destroy');
+Route::get('/damancoms/show/{id}', [DamancomController::class, 'show'])->name('damancoms.show');
+Route::get('/damancoms/search', [DamancomController::class, 'search'])->name('damancoms.search');
+//impots
+Route::get('/impots', [ImpotController::class, 'index'])->name('impots.index');
+Route::get('/impots/create', [ImpotController::class, 'create'])->name('impots.create');
+
+Route::post('/impots', [ImpotController::class, 'store'])->name('impots.store');
+Route::get('/impots/edit/{id}', [ImpotController::class, 'edit'])->name('impots.edit');
+Route::put('/impots/update/{id}', [ImpotController::class, 'update'])->name('impots.update');
+Route::delete('/impots/destroy/{id}', [ImpotController::class, 'destroy'])->name('impots.destroy');
+Route::get('/impots/show/{id}', [ImpotController::class, 'show'])->name('impots.show');
+Route::get('/impots/search', [ImpotController::class, 'search'])->name('impots.search');

@@ -46,6 +46,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class);
     }
+    public function damancom()
+    {
+        return $this->hasOne(Damancom::class);
+    }
 
     /**
      * The attributes that should be cast.
