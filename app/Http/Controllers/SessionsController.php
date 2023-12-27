@@ -25,8 +25,7 @@ class SessionsController extends Controller
     
             session()->regenerate();
             session(['user_email' => $user->name]);
-    
-            // Check if the email belongs to an admin
+    //hafi ka tchecki ila kan l admin howa hadal l email dyalo farah kidkhol l dahsboard dyal admin-dashboarda ou 
             if ($user->email === 'admin@marwabenharda.com') {
                 return redirect('admin-dashboard')->with(['success' => '']);
             } else {

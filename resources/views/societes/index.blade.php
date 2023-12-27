@@ -161,20 +161,25 @@
                                         
                                         
                                        
-                                        <td class="text-center">
-                                            <a style="color:#1cd09d" href="{{ route('societes.edit', $societe->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit société">
-                                                <i style="color:#1cd09d"  class="fas fa-user-edit "></i>
-                                            </a>
-                                           
-                                            <form data-bs-toggle="tooltip" data-bs-original-title="destroy société" action="{{ route('societes.destroy', $societe->id) }}" method="post" style="display: inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                    <i style="color: red"  onclick="return confirm('Are you sure?')" class="fas fa-trash-alt"></i>
-                                            </form>
-                                            <a  href="{{ route('societes.show', $societe->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Details société">
-                                                <i class="fas fa-info-circle text-info"></i>
-                                            </a>
-                                        </td>
+<td class="text-center">
+    <a style="color: #1cd09d" href="{{ route('societes.edit', $societe->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit société">
+        <i style="color: #1cd09d" class="fas fa-user-edit"></i>
+    </a>
+
+    <form data-bs-toggle="tooltip" data-bs-original-title="Destroy société" action="{{ route('societes.destroy', $societe->id) }}" method="post" style="display: inline-block;">
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;">
+            <i style="color: red" onclick="return confirm('Are you sure?')" class="fas fa-trash-alt"></i>
+        </button>
+    </form>
+
+    <a href="{{ route('societes.show', $societe->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Details société">
+        <i class="fas fa-info-circle text-info"></i>
+    </a>
+</td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

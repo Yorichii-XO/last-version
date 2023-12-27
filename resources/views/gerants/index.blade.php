@@ -98,7 +98,7 @@
                                         <td class="text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ $gerant->created_at->format('d/m/y') }}</span>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center d-flex align-items-center">
                                             <a href="{{ route('gerants.edit', $gerant->id) }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit Associé">
                                                 <i  class="fas fa-user-edit text-secondary"></i>
                                             </a>
@@ -106,9 +106,14 @@
                                             <form action="{{ route('gerants.destroy', $gerant->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" 
-                                                onclick="return confirm('Are you sure?')">Delete</button>
+                                                <button type="submit" style="background: none; border: none; padding: 0; margin: 0; cursor: pointer;">
+                                                    <i style="color: red" onclick="return confirm('Are you sure?')" class="fas fa-trash-alt"></i>
+                                                </button>
+                                               
                                             </form>
+                                            <a href="#" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Details société">
+                                                <i class="fas fa-info-circle text-info"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
