@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Societe;
 
 class Damancom extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'email', 'password',
+        'societe_id', 'login', 'password',
     ];
-    public function user()
+    public function societe()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Societe::class);
     }
 }

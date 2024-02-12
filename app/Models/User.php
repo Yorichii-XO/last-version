@@ -64,8 +64,9 @@ class User extends Authenticatable
     return $this->hasOne(Associé::class, 'associe_id');
 }
 
+public function isOnline()
+    {
+        return cache()->has('user-is-online-' . $this->id);
+    }
 
-
-    
-    
 }

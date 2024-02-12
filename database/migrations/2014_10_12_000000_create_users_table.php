@@ -17,12 +17,16 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password'); // This will store the hashed password
+            $table->string('unhashed_password')->nullable(); // This will store the unhashed password temporarily
+
             $table->string('role');
 
             $table->bigInteger('phone')->nullable();
             $table->string('location')->nullable();
             $table->string('about_me')->nullable();
+            $table->timestamp('last_activity')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

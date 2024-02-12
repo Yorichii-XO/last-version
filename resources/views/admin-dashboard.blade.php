@@ -1,149 +1,565 @@
-@extends('layouts.user_type.auth')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-GLhlTQ8iNl7iKlURnO3mHO2YFZCJ1fbsgFfNistP025L2tuXFUF5pBb2BO5th" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/48adce65bb.js" crossorigin="anonymous"></script>
+  <link  rel="icon" href="{{ asset('assets/img/fiduciaire.png') }}" type="image/x-icon">
+
+  <title>Document</title>
+</head>
+
+<style>
+   .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #00FFFF;
+            color: white;
+            border-radius: 50%;
+            height: 65px;
+            width: 65px;
+            margin-bottom: 20px;
+        }
+
+        .icon1 {
+            font-size: 30px;
+            color: white;
+            text-align: center;
+            
+
+        }
+.font-weight-bolderr{
+  margin-left:    70px;
+  margin-top: -76px;
+
+}
+
+.yi{
+  margin-left:  150px;
+  margin-top: -76px;
+}
+        .numbers {
+            text-align: center;
+        }
+
+        .card-title {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .text-success {
+            color: #28a745;
+        }
+
+        .text-danger {
+            color: #dc3545;
+        }
+  .text-center-100 {
+      justify-content: center;
+  }
+
+  .text-center-200,
+  .text-center-300,
+  .text-center-400,
+  .text-center-500 {
+      justify-content: center;
+  }
+
+  .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+
+  .search-form {
+      width: 490px;
+      margin-left: 280px;
+  }
+
+  @media (max-width: 767px) {
+      .search-form {
+          margin-left: 10px;
+          width: 100%;
+          margin-top: 70px;
+      }
+
+      
+  }
+
+  /* Additional media queries for responsiveness */
+  @media (max-width: 991px) {
+      .col-xl-3 {}
+  }
+
+  @media (max-width: 767px) {
+      .col-sm-9,
+      .col-xl-3 {}
+  }
+
+  @media (max-width: 575px) {
+      .col-8 {
+          flex-direction: column;
+          display: flex;
+z-index: 1;
+      }
+  }
+  ul#onlineUsersList {
+                  display: flex;
+                  padding: 0;
+                  margin-left: 10%;
+                }
+          
+                ul#onlineUsersList li {
+                  margin-right: 10px;
+                  padding: 8px;
+                  cursor: pointer;
+                  border-radius: 20px;
+                  color: #60ee81
+                }
+          
+                
+                .grid-container {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr); /* Updated to three columns */
+         
+            gap: 16px;
+            margin: 20px;
+            
+        }
+
+        @media (min-width: 640px) {
+            .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .grid-item {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05);
+        }
+      
+        .card1 {
+            padding: 20px;
+        }
+
+        .card1 h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card1 p {
+            color: #666;
+        }
+
+        .grid-link {
+            display: inline-block;
+            padding: 8px 12px;
+            text-decoration: none;
+            background-color: #03297D;
+            color: #fff;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .grid-link:hover {
+            background-color: #00FFFF;
+            color:03297D;
+        }
+
+        /* Icon styles */
+        .icon {
+            font-size: 33px;
+            margin: 10px;
+            padding-top:15px;
+          
+            background-color: #00FFFF;
+            border-radius: 50%;
+            height: 60px;
+            width: 60px;
+            text-align:center;
+             
+        }
+        .background{
+          background-color: #ffffff;
+          width:100%;
+          padding:50px;
+          border-radius: 10px;
+          margin-top:30px;
+        }
+
+      .banner-container {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top:20px;
+      
+    }
+
+    .text-container {
+      max-width: 80%;
+    }
+
+    .text-container h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .text-container p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .image-container img {
+      width: 70%;
+      height:20%;
+      border-radius: 8px;
+      padding:0;
+      margin:0;
+    }
+    
+    .list-unstyled {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; 
+
+}
+    .grid{
+      display: grid;
+      gap:16;
+      grid-template: (4,1fr)
+    }  
+</style>
+<body>
+  @extends('layouts.user_type.auth')
 
 @section('content')
-<form style="margin-left: 250px;margin-top:-90px" method="get" action="{{ route('associes.search') }}">
-  <div  style="width: 440px" class="ms-md-3 pe-md-3 d-flex align-items-center">
-      <div style="margin-right: 15px" class="input-group">
-          <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-          <input style="background-color: rgb(255, 255, 255) "  type="text" class="form-control" placeholder="Type here..." name="search"  value="{{ request('search') }}">
-      </div>
-      </div>
-  </form></div>
-  <div  class="row">
-    <div class="col-xl-3 col-sm-9 mb-xl-0 mb-9">
-      <div class="card">
-        <div class="card-body p-3">
-          <div class="row">
-            <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Associéte</p>
-                <h5 class="font-weight-bolder mb-0">
-                  53
-                  <span class="text-success text-sm font-weight-bolder">+155%</span>
-                </h5>
-              </div>
-            </div>
-            <div class="col-4 text-end">
-              <div  class="border-radius-md">
-                <?xml version="1.0" ?><svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z"/></svg>              </div>
-            </div>
+@php
+  $societes = session('societes');
+  $associe = session('associe');
+  $gerants = session('gerants');
+  $onlineUsers = session('onlineUsers');
+
+@endphp
+
+<div style="margin-top:-80px;" class="text-center-500">
+  <form class="search-form" method="get" action="{{ route('societes.search') }}">
+      <div  class="ms-md-3 pe-md-3 d-flex align-items-center">
+          <div style="margin-right: 25px" class="input-group">
+              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+              <input style="background-color: rgb(255, 255, 255) "  type="text" class="form-control" placeholder="Écrivez ici..." name="search"  value="{{ request('search') }}">
           </div>
-        </div>
       </div>
-    </div>
-    <div class="col-xl-3 col-sm-9 mb-xl-0 mb-9">
-      <div class="card">
-        <div class="card-body p-4">
-          <div class="row">
-            <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's money</p>
-                <h5 class="font-weight-bolder mb-0">
-                  $300
-                  <span class="text-success text-sm font-weight-bolder">+3%</span>
-                </h5>
-              </div>
-            </div>
-            <div  class="col-4 text-end">
-              <div  class="border-radius-md">
-                <?xml version="1.0" ?><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g id="Loaning"><path d="M11.5637,13.3492c5.32-.46,8.15,1.45,9.26,2.49a19.2359,19.2359,0,0,0,8.51,2.06,17.8676,17.8676,0,0,0,8.7-2.28c1.24-1.05,4.04-2.7,9.02-2.27a1.8121,1.8121,0,0,0,.32-3.61,16.0256,16.0256,0,0,0-10.67,2.37l1.97-6.19a2.5449,2.5449,0,0,0-2.43-3.31h-13.86a2.5405,2.5405,0,0,0-2.41,3.37l2.14,6.27c-2.03-1.43-5.52-2.98-10.86-2.51a1.8116,1.8116,0,1,0,.31,3.61Z"/><path d="M52.9939,44.2392a11.7215,11.7215,0,0,1-1.103-4.2947,11.04,11.04,0,0,1-6.065-19.6655,13.7977,13.7977,0,0,0-5.1421-3.07,20.8415,20.8415,0,0,1-11.23,3.35,22.6771,22.6771,0,0,1-11.48-3.24c-10.09,3.61-10.97,16.15-10.85,21.61a11.7472,11.7472,0,0,1-1.15,5.31l-3.25,6.81a7.0607,7.0607,0,0,0,6.37,10.11h40.78a7.0657,7.0657,0,0,0,6.38-10.11ZM31.2056,49.9775H30.811v3.31a1.5,1.5,0,0,1-3,0v-3.31H23.4272a1.5,1.5,0,1,1,0-3h7.7784a2.49,2.49,0,0,0,0-4.98H27.7163a5.7893,5.7893,0,0,1,0-11.5786h.0947V26.7553a1.5,1.5,0,0,1,3,0v3.6641H34.5a1.5,1.5,0,0,1,0,3H27.7163a2.7893,2.7893,0,0,0,0,5.5786h3.4893a5.49,5.49,0,0,1,0,10.98Z"/><path d="M52.7009,20.567A8.3593,8.3593,0,1,0,61.06,28.9262,8.3593,8.3593,0,0,0,52.7009,20.567Zm3.4783,9.5765H54.0351v2.2607a1.3346,1.3346,0,0,1-2.6691,0V30.1435H49.2226a1.3346,1.3346,0,1,1,0-2.6692H51.366v-2.026a1.3346,1.3346,0,1,1,2.6691,0v2.026h2.1441a1.3346,1.3346,0,1,1,0,2.6692Z"/></g></svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-body p-4">
-          <div class="row">
-            <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
-                <h5 class="font-weight-bolder mb-0">
-                  2,300
-                  <span class="text-success text-sm font-weight-bolder">+3%</span>
-                </h5>
-              </div>
-            </div>
-            <div  class="col-4 text-end">
-              <div  class="border-radius-md">
-                <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg enable-background="new 0 0 24 24" id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M9,9c0-1.7,1.3-3,3-3s3,1.3,3,3c0,1.7-1.3,3-3,3S9,10.7,9,9z M12,14c-4.6,0-6,3.3-6,3.3V19h12v-1.7C18,17.3,16.6,14,12,14z   "/></g><g><g><circle cx="18.5" cy="8.5" r="2.5"/></g><g><path d="M18.5,13c-1.2,0-2.1,0.3-2.8,0.8c2.3,1.1,3.2,3,3.2,3.2l0,0.1H23v-1.3C23,15.7,21.9,13,18.5,13z"/></g></g><g><g><circle cx="18.5" cy="8.5" r="2.5"/></g><g><path d="M18.5,13c-1.2,0-2.1,0.3-2.8,0.8c2.3,1.1,3.2,3,3.2,3.2l0,0.1H23v-1.3C23,15.7,21.9,13,18.5,13z"/></g></g><g><g><circle cx="5.5" cy="8.5" r="2.5"/></g><g><path d="M5.5,13c1.2,0,2.1,0.3,2.8,0.8c-2.3,1.1-3.2,3-3.2,3.2l0,0.1H1v-1.3C1,15.7,2.1,13,5.5,13z"/></g></g></svg>              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-body p-4">
-          <div class="row">
-            <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">New Gérants</p>
-                <h5 class="font-weight-bolder mb-0">
-                  +3,462
-                  <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                </h5>
-              </div>
-            </div>
-            <div class="col-4 text-end">
-              <div  class="border-radius-md">
-                <?xml version="1.0" ?><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title/><g data-name="briefcase simple" id="briefcase_simple"><path d="M20,5H17V4a3,3,0,0,0-3-3H10A3,3,0,0,0,7,4V5H4A3,3,0,0,0,1,8V20a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V8A3,3,0,0,0,20,5ZM9,4a1,1,0,0,1,1-1h4a1,1,0,0,1,1,1V5H9ZM4,7H20c2.28,0,.65,6-4,6H13a1,1,0,0,0-2,0H8C3.36,13,1.72,7,4,7ZM20,21H4a1,1,0,0,1-1-1V12.89C5.4,15.34,7.86,15,11,15a1,1,0,0,0,2,0c3.17,0,5.61.33,8-2.11V20A1,1,0,0,1,20,21Z"/></g></svg>              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-   
-    </div>
-  </div>
+  </form>
+  <br/>
+  <br/>
+</div>
   
-  <div class="row mt-2">
-    <div class="col-lg-7 mb-lg-3 mb-0">
+<div class="row">
+
+  
+  <div class="col-lg-4 col-md-6 mb-3">
       <div class="card">
-        <div class="card-body p-4">
-          <div class="row mb-lg-6">
-            <div class="col-lg-5">
-              <div class="d-flex flex-column h-100">
-                <p class="mb-1 pt-2 text-bold">Built by developer</p>
-                <h5 class="font-weight-bolder">WinBest Dashboard</h5>
-                <p class="mb-5">we create this dashboard for provide the services ,the goals to this dashboard to  .</p>
-                <a style="color: rgb(13, 32, 172)" href="javascript:;">
-                  Read More
-                  <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                </a>
+          <div class="card-body text-center">
+              <div class="icon-container">
+                  <span class="icon1"><i style="color:  rgb(35, 56, 173)" class="fas fa-user"></i></span>
               </div>
+              <div class="numbers">
+                  <h4 class="font-weight-bolderr">
+                      @if(session('user_email'))
+                      <p style="margin-top: 18px" class="text-body font-weight-bold px-0 text-dark"><span class="text-dark"> {{ session('user_email')}}</span></p>
+                  @endif
+                  </h4>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="card">
+        <div class="card-body text-center">
+            <div class="icon-container">
+                <span class="icon1">
+                    <img style="width: 50px; height: 50px; color: white" src="{{ asset('assets/img/winbest.webp') }}" alt="WinBest Logo">
+                </span>
             </div>
-            <div class="col-lg-6 ms-auto text-center mt-5 mt-lg-0">
-              <div class="bg-gradient-primary border-radius-lg h-100">
-                <img src="../assets/img/ivancik.jpg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none border-radius-lg" alt="waves">
-                <div class="position-relative d-flex align-items-center justify-content-center h-100">
+            <div class="numbers">
+              <a href="https://www.nettoyage-casablanca-maroc.com/">
+                <h5 class="font-weight-bolderr mb-0">
+                    <p style="margin-top: 18px" class="text-body font-weight-bold px-0 text-dark">
+                        <span class="text-dark">Société WinBest</span>
+                    </p>
+                </h5></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Card 3 -->
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div  class="card">
+      <div class="card-body text-center">
+          <div class="icon-container">
+              <span class="icon1"><i style="color: rgb(35, 56, 173)" class="fas fa-users"></i></span>
+          </div>
+          <div class="numbers">
+            <h6  class="font-weight-bolderr mb-0">
+              @auth
+                  @if ($onlineUsers)
+                      <style>
+                        
+                          .list-unstyled {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; /* Wrap the list items to the next line if they exceed the container width */
+}
+.numbers {
+            text-align: center;
+        }
+
+        .card-title {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-left:10px;
+        }
+
+        .text-success {
+            color: #8af1a2;
+        }
+
+        .text-danger {
+            color: #dc3545;
+        }
+        .dot {
+        width: 6px;
+        height: 19px;
+        top: -232px;
+        background-color: #42b883; /* Change the color to your desired color */
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 9px; /* Adjust the margin as needed */
+    }
+
+    .icon {
+            font-size: 33px;
+            margin: 10px;
+            padding-top:15px;
+          
+            background-color: #00FFFF;
+            border-radius: 50%;
+            height: 60px;
+            width: 60px;
+            text-align:center;
+             
+        }
+                          
+                      </style>
+          
+          <ul class="list-unstyled">
+            @foreach ($onlineUsers as $user)
+                              @if (!session('loggedOut') || $user->id === auth()->id())
+
+                                  <li>
+                                    <h4  class="card-title text-sm mb-0 text-capitalize font-weight-bolder text-success">
+                                        <i class="fa-solid fa-user text-success"></i>&nbsp; {{ $user->name }}
+                                    </h4>
+                                </li>
+    
+
+                              @endif
+                          @endforeach
+                      </ul>
+                  @else
+                      <p>No users currently logged in</p>
+                  @endif
+              @endauth
+          </h6>
+          
+            </div>
+          </div>
+      </div>
+    
+    </div>
+    
+    </div>
+    </div>
+      
+      <div class="row mt-2">
+        <div class="col-lg-7 mb-lg-3 mb-0 ">
+          <div class="card ">
+            <div class="card-body p-4">
+              <div class="row mb-lg-6">
+                <div class="col-lg-5 ">
+                  <div class="d-flex flex-column">
+                    <h5 class="font-weight-bold">WINBEST NETTOYAGE</h5>
+                    <p class="mb-4">Société de nettoyage à Casablanca Maroc, entreprise expert dans le nettoyage au Maroc avec
+                      plus de 20 ans d'expériences dans le domaine du nettoyage.
+                      <br/><br/>
+                      <a class="text-dark text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="https://www.nettoyage-casablanca-maroc.com/">
+                        Voir plus
+                        <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                      </a>
+                  </div>
+                </div>
+                <div class="col-lg-6 ms-auto text-center mt-5 mt-lg-0  ">
+                  <div class="bg-gradient-primary border-radius-lg">
+                    <img src="../assets/img/ivancik.jpg" class="position-absolute  w-50 top-19 d-lg-block d-none border-radius-lg" alt="waves">
+                    <div class="position-relative d-flex align-items-center justify-content-center ">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-5">
-      <div class="card h-100 p-1">
-        <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../assets/img/meeting.jpg');">
-          <span class="mask bg-gradient-dark"></span>
-          <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-            <h5 class="text-white font-weight-bolder mb-4 pt-2">WinstBest is ... </h5>
-            <p class="text-white"> the big company, Work with Many companys for provide the great services that they need and It has many branches that work on various services.</p>
-            <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
-              Read More
-              <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-            </a>
+        <div class="col-lg-5">
+          <div class="card  p-1">
+            <div class="overflow-hidden h-100 position-relative border-radius-lg bg-cover h-100" style="background-image: url('../assets/img/meeting.jpg');">
+              <span class="mask bg-gradient-dark"></span>
+              <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
+                <h5 class="text-white font-weight-bold
+                 mb-4 pt-2"> <u> Société de Nettoyage à Casablanca, Maroc</u></h5>
+                <p class="text-white">
+                  
+
+                  Nous sommes une entreprise de nettoyage basée à Casablanca, Maroc,
+                   reconnue pour son expérience et sa compétitivité. Notre service s'étend aux particuliers, aux professionnels et aux collectivités. Nous nous spécialisons dans le nettoyage industriel ainsi que dans divers travaux à Casablanca et à travers tout le Maroc. <br/>             
+                <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="https://www.nettoyage-casablanca-maroc.com/">
+                  Voir plus
+                  <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-    </div>
-  </div>
+        </div>
+      </div>
+      <div class="background">
+        <div>
+            <h4 style="color:rgb(13, 53, 128);font-size:40px;text-align:center; padding:20px;font-weight:bold">NOS SERVICES</h4>
+          </div>
+          <div class="horizontal">
+        
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-16">
+            <!-- Service 1 -->
+            <div class="grid-item">
+                <div class="card1">
+                <h5>Société de nettoyage bureaux</h5>
+        <br>
+        <i class="icon fas fa-building"></i>                    <br>
+                    <p>Pour accroître la productivité, il est conseillé de consacrer tous les efforts nécessaires pour créer une atmosphère agréable et une ambiance conviviale pour vos salariés...</p>
+                    <a href="https://www.nettoyage-casablanca-maroc.com/societe-nettoyage-bureaux-casablanca.html" class="grid-link">Learn More</a>
+                </div>
+            </div>
+        
+            <!-- Service 2 -->
+            <div class="grid-item">
+                <div class="card1">
+                <h5>Société de femmes de ménage</h5>
+        <br>
+        <i class="icon fas fa-broom"></i>                    <br>
+                    <p>Faites appel à notre société de femmes de ménage à Casablanca, des spécialistes pour prendre soin de votre intérieur. WINBEST NETTOYAGE est la solution si vous voulez prendre soin de votre domicile...</p>
+                    <a href="https://www.nettoyage-casablanca-maroc.com/societe-femme-menage-casablanca.html" class="grid-link">Learn More</a>
+                </div>
+            </div>
+        
+            <!-- Service 3 -->
+            <div class="grid-item">
+                <div class="card1">
+                <h5>Société de nettoyage et d'entretien de canapés</h5>
+        <br>
+        <i class="icon fas fa-couch"></i>                    <br>
+                    <p>Pensez à nettoyer votre canapé et vos fauteuils pour préparer la saison estivale ou en fin de saison. Désinfectez, nettoyez et enlevez les mauvaises odeurs pour assainir votre intérieur...</p>
+                    <a href="https://www.nettoyage-casablanca-maroc.com/societe-nettoyage-canapes-casablanca.html" class="grid-link">Learn More</a>
+                </div>
+            </div>
+        
+            <!-- Service 4 -->
+            <div class="grid-item">
+                <div class="card1">
+                <h5>Société de nettoyage des restaurants</h5>
+        <br>
+        <i class="icon fas fa-utensils"></i>                    <br>
+                    <p>Avec une équipe compétente et professionnelle, notre entreprise propose une variété de techniques de nettoyage, respectant les lois et réglementations en vigueur...</p>
+                    <a href="https://www.nettoyage-casablanca-maroc.com/societe-nettoyage-restaurants-casablanca.html" class="grid-link">Learn More</a>
+                </div>
+            </div>
+        
+            <!-- Service 5 -->
+            <div class="grid-item">
+                <div class="card1">
+                <h5>Société de nettoyage de vitres</h5>
+        <br>
+        <i class="icon fas fa-window-maximize"></i>   
+                    <br>
+                    <p>Notre équipe expérimentée de nettoyage professionnel de vitres à Casablanca et dans tout le Maroc est spécialisée dans divers environnements...</p>
+                    <a href="https://www.nettoyage-casablanca-maroc.com/societe-nettoyage-vitres-casablanca.html" class="grid-link">Learn More</a>
+                </div>
+            </div>
+        
+            <!-- Service 6 -->
+            <div class="grid-item">
+                <div class="card1">
+                <h5>Société de nettoyage de parquets</h5>
+        <br>
+        <i class="icon fas fa-paint-roller"></i>
+        <br>
+                    <p>Le ponçage à Casablanca permet de retrouver le bois brut, d'aplanir la surface, d'effacer les taches et d'enlever la couche de traitement précédente si le parquet avait été vitrifié, ciré ou huilé...</p>
+                    <a href="https://www.nettoyage-casablanca-maroc.com/societe-nettoyage-parquets-casablanca.html" class="grid-link">Learn More</a>
+                </div>
+            </div>
+        </div>
+  <script>
+    // Add this script to handle sidebar toggling
+    $(document).ready(function () {
+        $('#iconNavbarSidenav').on('click', function () {
+            $('body').toggleClass('g-sidenav-pinned');
+            $('body').toggleClass('g-sidenav-hidden');
+        });
+    });
+</script>
 @endsection
 @push('dashboard')
   <script>
@@ -320,3 +736,6 @@
   </script>
 @endpush
 
+
+</body>
+</html>

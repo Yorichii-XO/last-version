@@ -24,5 +24,16 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        // Second Admin
+        DB::table('users')->insert([
+            'id' => 2,
+            'name' => 'super-admin',
+            'email' => 'super_admin@fatimezahra.com',
+            'password' => Hash::make('secret-winbest@12344'),
+            'role' => 'super-admin',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

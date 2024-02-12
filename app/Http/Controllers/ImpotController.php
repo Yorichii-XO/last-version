@@ -5,14 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Impot;
 use App\Models\User;
+use App\Models\Societe;
+use Illuminate\Support\Facades\Session;
+
 class ImpotController extends Controller
 {
     public function index()
     {
-        
-        $impots =Impot::All();
+        $societe = Societe::All(); 
 
-        return view('impots.index', compact('impots'));
+        
+        $impots =Impot::simplePaginate(5);
+
+        return view('impots.index', compact('impots','societe'));
     }
     public function show($id)
     {
@@ -26,31 +31,47 @@ class ImpotController extends Controller
     }
     public function create()
     {
-        $users = User::All(); 
+        $societes = Societe::All(); 
 
-        return view('impots.create', compact('users'));
+        return view('impots.create', compact('societes'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
           
-            'email' => 'required|email',
+            'login' => 'required|email',
             'password' => 'required',
-            'user_id' => 'required',
+            'code_acce'=>'required',
+            'societe' => 'required|string|exists:societes,name', 
         ]);
+    
+        $societe = Societe::where('name', $request->input('societe'))->first();
+    
+        if ($societe) {
+            $newAssocié = new Impot([
+                
+                'login' => $request->input('login'),
+                'password' => $request->input('password'),
+                'code_acce'=>$request->input('code_acce'),
+                'societe_id' => $societe->id,
+            ]);
+    
+            $newAssocié->save();
+            Session::flash('success', 'Impot created successfully.');
 
-        Impot::create($request->all());
-
-        return redirect()->route('impots.index')->with('success', 'Impot created successfully.');
+            return redirect()->route('impots.index');
+        }
+    
+        return redirect()->back()->with('error', 'Societe not found.');
     }
  
     public function edit($id)
     {
-        $users = User::All(); 
+        $societes = Societe::All(); 
 
-        $impot =Impot::findOrFail($id);
-        return view('impots.edit', compact('impot','users'));
+        $impot =Impot::with('societe')->findOrFail($id);
+        return view('impots.edit', compact('impot','societes'));
     }
 
     public function update(Request $request, $id)
@@ -58,34 +79,44 @@ class ImpotController extends Controller
         $impot = Impot::findOrFail($id);
 
         $request->validate([
-            'email' => 'required|email',
-            'password'=>'required',
-            'user_id' => 'required',
+            'login' => 'required',
+            'password' => 'required',
+            'code_acce'=>'required',
+            'societe_id' => 'required',
         ]);
-
+    
         $impot->update($request->all());
+        Session::flash('success', 'Impot Updated successfully.');
 
-        return redirect()->route('impots.index')->with('success', 'Impot updated successfully');
+        return redirect()->route('impots.index');
     }
 
+    
     public function destroy($id)
     {
         $impot = Impot::findOrFail($id);
         $impot->delete();
 
-        return redirect()->route('impots.index')->with('success', 'Impot deleted successfully');
+        return redirect()->route('impots.index')->with('succss', 'Impot deleted successfully');
     }
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $search = $request->search;
-        $impots = Impot::where(function($query) use ($search) {
-            $query->where('email', 'like', "%$search%")
-            ->orWhere('user_id','like',"%$search%")
-            ->orWhere('id','like',"%$search%");
-
-        })->get();
-      
     
-        
-        return view('impots.index', compact('impots', 'search'));
+        $impots = Impot::with('societe')
+            ->where(function ($query) use ($search) {
+                $query->where('login', 'like', "%$search%")
+                    ->orWhere('password', 'like', "%$search%");
+                  
+    
+                $query->orWhereHas('societe', function ($subquery) use ($search) {
+                    $subquery->where('name', 'like', "%$search%");
+                });
+            })
+            ->simplePaginate(5);
+    
+        return view('impots.index', compact('associés', 'search'));
     }
+    
+ 
 }

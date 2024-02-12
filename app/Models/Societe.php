@@ -20,8 +20,32 @@ class Societe extends Model
         'cnss', 
         'ice', 
         'rib', 
-        'date_exploitation',
+        'mode',
         'date_debut_exploitation',  
 
     ];
+    public function gerants()
+    {
+        return $this->hasMany(Gerant::class);
+    }
+    public function associes()
+{
+    return $this->hasMany(Associé::class);
+}
+public function impots()
+{
+    return $this->hasOne(Impot::class);
+}
+public function regus()
+{
+    return $this->hasOne(Regus::class);
+}
+public function damancoms()
+{
+    return $this->hasOne(Damancom::class);
+}
+public function cimrs()
+    {
+        return $this->hasMany(Cimr::class);
+    }
 }

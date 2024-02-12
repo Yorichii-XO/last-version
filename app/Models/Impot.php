@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Societe;
 
 class Impot extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'email', 'password',
+        'societe_id', 'login', 'password','code_acce'
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    public function societe()
+{
+    return $this->belongsTo(Societe::class, 'societe_id');
+}
 }

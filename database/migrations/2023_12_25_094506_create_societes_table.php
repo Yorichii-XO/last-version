@@ -26,7 +26,8 @@ return new class extends Migration
              $table->string('cnss');
              $table->string('ice');
              $table->string('rib');
-             $table->date('date_exploitation');
+             $table->string('mode');
+
              $table->date('date_debut_exploitation');
 
             $table->timestamps();

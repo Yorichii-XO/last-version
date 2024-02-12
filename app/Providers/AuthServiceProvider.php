@@ -25,6 +25,29 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
-    }
-}
+        Gate::define('manage-all-gerants', function ($user) {
+            return $user->role === 'super-admin' ||$user->role === 'admin' ;
+        });
+        
+        Gate::define('ajouter-gerant', function ($user) {
+            return $user->role === 'admin' || $user->role === 'super-admin';
+        });
+        
+        Gate::define('show-gerant', function ($gerant) {
+            return $gerant->role === 'gérant';
+        });
+        
+        Gate::define('show-associe', function ($associe) {
+            return $associe->role === 'associé';
+        });
+        
+        
+        Gate::define('show-societe', function ($societe) {
+            return $societe->role === 'gérant' && $societe->role === 'associé';
+        });
+        
+        Gate::define('show', function ($user) {
+            return $user->role === 'gérant' || $user->role === 'associé';
+        });
+        
+}}

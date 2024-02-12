@@ -15,6 +15,10 @@ class InfoUserController extends Controller
     {
         return view('laravel-examples/user-profile');
     }
+    public function profile()
+    {
+        return view('laravel-examples/profile');
+    }
 
     public function store(Request $request)
     {
